@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 dotenv.config();
 
 const customersRoutes = require('./routes/customers');
+const employeesRoutes = require('./routes/employees');
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -15,7 +16,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json());
 
-
 app.use('/api/customers', customersRoutes);
+app.use('/api/employees', employeesRoutes);
 
 module.exports = app;

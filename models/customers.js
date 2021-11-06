@@ -1,6 +1,5 @@
 const mysql = require('mysql');
 const db = require('../config/db');
-// mysql.escape()
 
 exports.getAllCustomers = (callback) => {
     db.query('SELECT * FROM customers;', (error,results) => {
@@ -12,7 +11,7 @@ exports.getAllCustomers = (callback) => {
 };
 
 exports.getNbCustomers = (callback) => {
-    db.query('SELECT COUNT(customerNumber) as CustomerNumbers FROM customers;', (error, results) => {
+    db.query('SELECT COUNT(customerNumber) AS CustomerNumbers FROM customers;', (error, results) => {
         if(error){
             return callback(error);
         }
