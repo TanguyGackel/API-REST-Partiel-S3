@@ -6,6 +6,9 @@ dotenv.config();
 
 const customersRoutes = require('./routes/customers');
 const employeesRoutes = require('./routes/employees');
+const officeRoutes = require('./routes/offices');
+const ordersRoutes = require('./routes/orders');
+const productsRoutes = require('./routes/products');
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -18,5 +21,8 @@ app.use(bodyParser.json());
 
 app.use('/api/customers', customersRoutes);
 app.use('/api/employees', employeesRoutes);
+app.use('/api/offices', officeRoutes);
+app.use('/api/orders', ordersRoutes);
+app.use('/api/products', productsRoutes);
 
 module.exports = app;

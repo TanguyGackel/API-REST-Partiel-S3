@@ -38,7 +38,16 @@ exports.getBestEmployeesByPayments = (callback) => {
 }
 
 exports.getEmployeeById = (data, callback) => {
-    db.query('SELECT * FROM employees WHERE employeeNumber = ' + mysql.escape(data), (error, results) => {
+    db.query('SELECT * FROM employees WHERE employeeNumber = ' + mysql.escape(data) + ';', (error, results) => {
+        if(error){
+            return callback(error);
+        }
+        return callback(null, results);
+    });
+}
+
+exports.getEmployeesByOffice = (data, callback) => {
+    db.query('SELECT * FROM employees WHERE officeCode = ' + mysql.escape(data) + ';', (error, results) => {
         if(error){
             return callback(error);
         }

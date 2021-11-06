@@ -59,3 +59,18 @@ exports.employeeById = (req, res) => {
         });
     });
 }
+
+exports.employeeByOffice = (req, res) => {
+    employeesMdl.getEmployeesByOffice(req.params.office, (error, results) => {
+        if(error){
+            return res.status(400).send({
+                success: 0,
+                data: error
+            })
+        }
+        return res.status(200).send({
+            success: 1,
+            data: results
+        });
+    });
+}

@@ -8,5 +8,6 @@ router.get('/', employeesCtrl.allEmployees);
 router.get('/best', employeesCtrl.bestEmployees);
 router.get('/best/bypayments', employeesCtrl.bestEmployeesByPayments);
 router.get('/:id', employeesCtrl.employeeById);
+router.get('/offices/:office', employeesCtrl.employeeByOffice);
 
 module.exports = router;
