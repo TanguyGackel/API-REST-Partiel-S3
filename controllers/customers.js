@@ -1,6 +1,6 @@
 const customersMdl = require('../models/customers');
 
-exports.AllCustomers = (req, res) => {
+exports.allCustomers = (req, res) => {
     customersMdl.getAllCustomers((error,results) => {
         if(error){
             return res.status(400).send({
@@ -30,7 +30,7 @@ exports.nbCustomers = (req, res) => {
     });
 };
 
-exports.OneCustomerById = (req, res) => {
+exports.oneCustomerById = (req, res) => {
     customersMdl.getCustomersById(req.params.id, (error, results) => {
         if(error){
             return res.status(400).send({
@@ -82,8 +82,52 @@ exports.createOneCustomer = (req, res) => {
         salesRepEmployeeNumber: req.body.salesRepEmployeeNumber,
         creditLimit: req.body.creditLimit
     }
-    console.log(data);
     customersMdl.createCustomer(data, (error, results) => {
+        if(error){
+            return res.status(400).send({
+                success: 0,
+                data: error
+            });
+        }
+        return res.status(201).send({
+            success: 1,
+            data: results
+        });
+    });
+}
+
+exports.updateOneCustomer = (req, res) => {
+    const data = {
+        customerNumber: req.body.customerNumber,
+        customerName: req.body.customerName,
+        contactLastName: req.body.contactLastName,
+        contactFirstName: req.body.contactFirstName,
+        phone: req.body.phone,
+        addressLine1: req.body.addressLine1,
+        addressLine2: req.body.addressLine2,
+        city: req.body.city,
+        state: req.body.state,
+        postalCode: req.body.postalCode,
+        country: req.body.country,
+        salesRepEmployeeNumber: req.body.salesRepEmployeeNumber,
+        creditLimit: req.body.creditLimit
+    }
+    customersMdl.updateCustomer(data, (error, results) => {
+        if(error){
+            return res.status(400).send({
+                success: 0,
+                data: error
+            });
+        }
+        return res.status(200).send({
+            success: 1,
+            data: results
+        });
+    });
+}
+
+exports.deleteOneCustomer = (req, res) => {
+    customersMdl.deleteCustomer(req.params.id, (error, results) => {
         if(error){
             return res.status(400).send({
                 success: 0,
