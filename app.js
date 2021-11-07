@@ -10,6 +10,8 @@ const officeRoutes = require('./routes/offices');
 const ordersRoutes = require('./routes/orders');
 const productsRoutes = require('./routes/products');
 const orderDetailsRoutes = require('./routes/orderdetails');
+const productLinesRoutes = require('./routes/productlines');
+const paymentsRoutes = require('./routes/payments');
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -26,5 +28,7 @@ app.use('/api/offices', officeRoutes);
 app.use('/api/orders', ordersRoutes);
 app.use('/api/products', productsRoutes);
 app.use('/api/orderDetails', orderDetailsRoutes);
+app.use('/api/productLines', productLinesRoutes);
+app.use('/api/payments', paymentsRoutes);
 
 module.exports = app;
