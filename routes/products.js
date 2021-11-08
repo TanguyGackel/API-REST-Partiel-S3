@@ -10,5 +10,6 @@ router.delete('/:id', productsCtrl.deleteProduct);
 router.put('/', productsCtrl.updateProduct);
 router.get('/mostorder', productsCtrl.MostOrderProducts)
 router.get('/mostorderexpensive', productsCtrl.MostOrderExpensiveProducts)
+router.post('/byyearbutnotanotheryear', productsCtrl.productByYearButNotAnotherYear);
 
 module.exports = router;

@@ -111,3 +111,22 @@ exports.MostOrderExpensiveProducts = (req, res) => {
         });
     });
 }
+
+exports.productByYearButNotAnotherYear = (req, res) => {
+    const data = {
+        bonneannee : req.body.bonneannee,
+        mauvaiseannee : req.body.mauvaiseannee
+    }
+    productsMdl.getProductsByYearButNotAnotherYear(data, (error,results) => {
+        if(error){
+            return res.status(400).send({
+                success: 0,
+                data: error
+            })
+        }
+        return res.status(200).send({
+            success: 1,
+            data: results
+        });
+    });
+}
