@@ -12,7 +12,25 @@ exports.getMonthHighestPayments = (data, callback) => {
 }
 
 exports.getPaymentsByDate = (data, callback) => {
-    db.query('SELECT SUM(amount) as TotalPayments FROM payments WHERE paymentDate = ' + mysql.escape(data) + ";", (error, results) => {
+    db.query('SELECT SUM(amount) as TotalPayments FROM payments WHERE paymentDate = ' + mysql.escape(data) + ';', (error, results) => {
+        if(error){
+            return callback(error);
+        }
+        return callback(null, results);
+    });
+}
+
+exports.getPaymentsBetweenTwoDates = (data, callback) => {
+    db.query('SELECT SUM(amount) as TotalPayments FROM payments WHERE DATE_FORMAT(paymentDate, "%Y") >= ' + mysql.escape(data.un) + 'AND DATE_FORMAT(paymentDate, "%Y") <= ' + mysql.escape(data.deux) + ';', (error, results) => {
+        if(error){
+            return callback(error);
+        }
+        return callback(null, results);
+    });
+}
+
+exports.getPaymentsBetweenTwoMonths = (data, callback) => {
+    db.query('SELECT SUM(amount) as TotalPayments FROM payments WHERE DATE_FORMAT(paymentDate, "%M") >= ' + mysql.escape(data.un) + ' AND DATE_FORMAT(paymentDate, "%M") <= ' + mysql.escape(data.deux)  + ' AND DATE_FORMAT(paymentDate, "%Y") = ' + mysql.escape(data.annee), (error, results) => {
         if(error){
             return callback(error);
         }
