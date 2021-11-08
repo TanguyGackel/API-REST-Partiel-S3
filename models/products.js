@@ -36,3 +36,24 @@ exports.updateOneProduct = (data, callback) => {
         return callback(null, results);
     });
 }
+
+exports.ProductOrderByOrdersLimitThree = (callback) => {
+    db.query('SELECT productCode, SUM(quantityOrdered) AS TotalCommande FROM orderdetails ' +
+        'GROUP BY productCode ' +
+        'ORDER BY TotalCommande DESC ' +
+        'LIMIT 3;', (error,results) => {
+        if(error){
+            return callback(error);
+        }
+        return callback(null, results);
+    });
+}
+
+exports.ProductOrderByPriceOrdersLimitThree = (callback) => {
+    db.query('SELECT productCode, SUM(priceEach*quantityOrdered) AS TotalPrice FROM orderdetails GROUP BY productCode ORDER BY TotalPrice DESC LIMIT 3;', (error,results) => {
+        if(error){
+            return callback(error);
+        }
+        return callback(null, results);
+    });
+}

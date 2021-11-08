@@ -54,3 +54,12 @@ exports.getEmployeesByOffice = (data, callback) => {
         return callback(null, results);
     });
 }
+
+exports.getReportsToById = (data, callback) => {
+    db.query('SELECT * FROM employees WHERE reportsTo = ' + mysql.escape(data) + ';', (error, results) => {
+        if(error){
+            return callback(error);
+        }
+        return callback(null, results);
+    });
+}

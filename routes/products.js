@@ -8,5 +8,7 @@ router.get('/orders/:id', productsCtrl.productsByOrder);
 router.post('/', productsCtrl.NewProduct);
 router.delete('/:id', productsCtrl.deleteProduct);
 router.put('/', productsCtrl.updateProduct);
+router.get('/mostorder', productsCtrl.MostOrderProducts)
+router.get('/mostorderexpensive', productsCtrl.MostOrderExpensiveProducts)
 
 module.exports = router;

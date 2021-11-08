@@ -81,3 +81,33 @@ exports.updateProduct = (req, res) => {
         });
     });
 }
+
+exports.MostOrderProducts = (req, res) => {
+    productsMdl.ProductOrderByOrdersLimitThree((error,results) => {
+        if(error){
+            return res.status(400).send({
+                success: 0,
+                data: error
+            })
+        }
+        return res.status(200).send({
+            success: 1,
+            data: results
+        });
+    });
+}
+
+exports.MostOrderExpensiveProducts = (req, res) => {
+    productsMdl.ProductOrderByPriceOrdersLimitThree((error,results) => {
+        if(error){
+            return res.status(400).send({
+                success: 0,
+                data: error
+            })
+        }
+        return res.status(200).send({
+            success: 1,
+            data: results
+        });
+    });
+}
