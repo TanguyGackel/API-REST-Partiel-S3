@@ -66,3 +66,14 @@ exports.deleteCustomer = (data, callback) => {
         return callback(null, results);
     })
 }
+
+exports.getCustomersWhoDidntPayByYear = (data, callback) => {
+    db.query('SELECT * FROM customers' +
+        ' WHERE customerNumber NOT IN (SELECT customerNumber FROM payments' +
+        ' WHERE DATE_FORMAT(paymentDate, "%Y") = ' + mysql.escape(data) + ');', (error, results) => {
+        if(error){
+            return callback(error);
+        }
+        return callback(null, results);
+    });
+}

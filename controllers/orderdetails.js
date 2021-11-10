@@ -6,7 +6,7 @@ exports.addProductToOrder = (req, res) => {
         productCode: req.body.productCode,
         quantityOrdered: req.body.quantityOrdered,
         priceEach: req.body.priceEach,
-        orderLineNumber: req.body.orderNumber
+        orderLineNumber: req.body.orderLineNumber
     }
     orderDetailsMdl.createOrderDetails(data, (error, results) => {
         if(error){

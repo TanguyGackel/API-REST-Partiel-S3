@@ -11,5 +11,6 @@ router.get('/byemployee/:id', customersCtrl.customerByEmployeeId);
 router.post('/', customersCtrl.createOneCustomer);
 router.put('/', customersCtrl.updateOneCustomer);
 router.delete('/:id', customersCtrl.deleteOneCustomer);
+router.get('/customerswhodidntpaybyyear/:id', customersCtrl.customersWhoDidntPayByYear);
 
 module.exports = router;

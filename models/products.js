@@ -59,11 +59,14 @@ exports.ProductOrderByPriceOrdersLimitThree = (callback) => {
 }
 
 exports.getProductsByYearButNotAnotherYear = (data, callback) => {
-    db.query('SELECT DISTINCT products.productCode, productName, productLine, productScale, productVendor, productDescription, quantityInStock, buyPrice, MSRP FROM products' +
-        ' JOIN orderdetails ON orderdetails.productCode = products.productCode' +
-        ' JOIN orders ON orders.orderNumber = orderdetails.orderNumber' +
-        ' WHERE DATE_FORMAT(orders.orderDate, "%Y") LIKE ' + mysql.escape(data.bonneannee) +
-        ' WHERE DATE_FORMAT(orders.orderDate, "%Y") LIKE ' + mysql.escape(data.mauvaiseannee), (error,results) => {
+    db.query('SELECT products.productCode, productName, productLine, productScale, productVendor, productDescription, quantityInStock, buyPrice, MSRP FROM products' +
+    ' JOIN orderdetails on orderdetails.productCode = products.productCode' +
+    ' JOIN orders on orders.orderNumber = orderdetails.orderNumber' +
+    ' WHERE DATE_FORMAT(orders.orderDate, "%Y") = ' + mysql.escape(data.bonneannee) +
+    ' AND products.productCode NOT IN' +
+    ' (SELECT productCode FROM orderdetails' +
+    ' JOIN orders on orders.orderNumber = orderdetails.orderNumber' +
+    ' WHERE DATE_FORMAT(orders.orderDate, "%Y") = ' + mysql.escape(data.mauvaiseannee) + ');', (error,results) => {
         if(error){
             return callback(error);
         }
