@@ -36,8 +36,50 @@ router.get('/nb', customersCtrl.nbCustomers);
  *          '400':
  *              description: Bad request
  */
-router.get('/:id', customersCtrl.oneCustomerById);//TODO swagger
-router.get('/byemployee/:id', customersCtrl.customerByEmployeeId);//TODO swagger
+router.get('/:id', customersCtrl.oneCustomerById);//T
+/**
+ * @swagger
+ * /api/customers/{id}:
+ *  get:
+ *      description: Used to get customer by id
+ *      tags:
+ *          - customers
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            type: integer
+ *            description: Customer id
+ *            required: true
+ *      responses:
+ *          '200':
+ *              description: Resource returned successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
+router.get('/byemployee/:id', customersCtrl.customerByEmployeeId);
+/**
+ * @swagger
+ * /api/customers/byemployee/{id}:
+ *  get:
+ *      description: Used to get customer by employee id
+ *      tags:
+ *          - customers
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            type: integer
+ *            description: Employee id
+ *            required: true
+ *      responses:
+ *          '200':
+ *              description: Resource returned successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
 router.post('/', customersCtrl.createOneCustomer);
 /**
  * @swagger
@@ -251,6 +293,26 @@ router.put('/', customersCtrl.updateOneCustomer);
  *              description: Bad request
  */
 router.delete('/:id', customersCtrl.deleteOneCustomer);//TODO swagger
-router.get('/customerswhodidntpaybyyear/:id', customersCtrl.customersWhoDidntPayByYear);//TODO swagger
-
+router.get('/customerswhodidntpaybyyear/:id', customersCtrl.customersWhoDidntPayByYear);
+/**
+ * @swagger
+ * /api/customers/customerswhodidntpaybyyear/{id}:
+ *  get:
+ *      description: Used to get customer who didn't pay by year
+ *      tags:
+ *          - customers
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            type: integer
+ *            description: Customer id
+ *            required: true
+ *      responses:
+ *          '200':
+ *              description: Resource returned successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
 module.exports = router;
