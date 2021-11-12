@@ -1,8 +1,25 @@
 const app = require('express')();
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 
 dotenv.config();
+
+const swaggerOption = {
+    swaggerDefinition : (swaggerJsdoc.Options = {
+        info : {
+            title : "API REST PARTIEL",
+            description : "API documentation",
+            contact : {
+                name : "GACKEL",
+                surname : "Tanguy"
+            },
+            servers : ['http://localhost:${process.env.PORT}/'],
+        },
+    }),
+    apis: ["app", "./routes/*"],
+}
 
 const customersRoutes = require('./routes/customers');
 const employeesRoutes = require('./routes/employees');
@@ -21,6 +38,9 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+
+const swaggerDocs = swaggerJsdoc(swaggerOption);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use('/api/customers', customersRoutes);
 app.use('/api/employees', employeesRoutes);

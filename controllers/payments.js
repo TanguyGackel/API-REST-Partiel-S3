@@ -32,8 +32,8 @@ exports.paymentsByDate = (req, res) => {
 
 exports.paymentsBetweenTwoDates = (req, res) => {
     const data = {
-        un : req.body.premiereAnnee,
-        deux : req.body.secondeAnnee
+        un : req.params.premdate,
+        deux : req.params.secdate
     }
     paymentsMdl.getPaymentsBetweenTwoDates(data, (error, results) => {
         if(error){
@@ -51,10 +51,11 @@ exports.paymentsBetweenTwoDates = (req, res) => {
 
 exports.paymentsBetweenTwoMonths = (req, res) => {
     const data = {
-        un : req.body.premierMois,
-        deux : req.body.secondMois,
-        annee : req.body.annee
+        un : req.params.premmois,
+        deux : req.params.secmois,
+        annee : req.params.date
     }
+    console.log(data);
     paymentsMdl.getPaymentsBetweenTwoMonths(data, (error, results) => {
         if(error){
             return res.status(400).send({
