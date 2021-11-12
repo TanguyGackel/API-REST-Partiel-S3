@@ -54,7 +54,46 @@ router.post('/', orderDetailsCtrl.addProductToOrder);
  *          '400':
  *              description: Bad request
  */
-router.delete('/', orderDetailsCtrl.deleteProductToOrder);
+router.delete('/', orderDetailsCtrl.deleteProductToOrder);//TODO swagger
 router.put('/', orderDetailsCtrl.updateProductToOrder);
+/**
+ * @swagger
+ * /api/orderdetails:
+ *   put:
+ *      description: Used to update an order details
+ *      tags:
+ *          - order details
+ *      parameters:
+ *          - in: body
+ *            name: orderdetails
+ *            schema:
+ *              type: object
+ *              required:
+ *                 - orderNumber
+ *                 - productCode
+ *                 - quantityOrdered
+ *              properties:
+ *                  orderNumber:
+ *                      type: integer
+ *                      example: 10404
+ *                      required: true
+ *                  productCode:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      example: S50_1392
+ *                      required: true
+ *                  quantityOrdered:
+ *                      type: integer
+ *                      example: 60
+ *                      required: true
+ *      responses:
+ *          '200':
+ *              description: Resource created successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
 
 module.exports = router;

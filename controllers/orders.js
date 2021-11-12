@@ -25,7 +25,9 @@ exports.createOrderForCustomerWithListOfOrderDetails = (req, res) => {
         status : req.body.status
     };
     ordersMdl.createOrder(dataOrder, (error, results) => {
-        for (let i = 0; i < req.body.nbOrderDetails; i++) {
+        for (i = 0; i < req.body.nbOrderDetails; i++) {
+            console.log(i);
+            console.log((req.body.productCode[i]))
             const dataOrderDetails = {
                 orderNumber : req.body.orderNumber,
                 productCode : req.body.order.productCode[i],

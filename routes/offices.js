@@ -46,7 +46,7 @@ router.post('/', officeCtrl.newOffice);
  *          - offices
  *      parameters:
  *          - in: body
- *            name: customers
+ *            name: Customers
  *            schema:
  *              type: object
  *              required:
@@ -121,6 +121,89 @@ router.post('/', officeCtrl.newOffice);
  *              description: Bad request
  */
 router.put('/', officeCtrl.updateOffice);
-router.delete('/:id', officeCtrl.deleteOffice)
+/**
+ * @swagger
+ * /api/offices:
+ *   put:
+ *      description: Used to update an office
+ *      tags:
+ *          - offices
+ *      parameters:
+ *          - in: body
+ *            name: offices
+ *            schema:
+ *              type: object
+ *              required:
+ *                 - officeCode
+ *                 - city
+ *                 - phone
+ *                 - addressLine1
+ *                 - addressLine1
+ *                 - state
+ *                 - country
+ *                 - postalCode
+ *                 - territory
+ *              properties:
+ *                  officeCode:
+ *                      type: integer
+ *                      example: 100
+ *                      required: true
+ *                  phone:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: true
+ *                      example: 0909090909
+ *                  addressLine1:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: true
+ *                      example: 10 John Doe Street
+ *                  addressLine2:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: false
+ *                      example: building A
+ *                  city:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: true
+ *                      example: New York
+ *                  state:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: false
+ *                      example: New York State
+ *                  postalCode:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: false
+ *                      example: New York
+ *                  country:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: true
+ *                      example: New York
+ *                  territory:
+ *                      type: string
+ *                      minlenth: 1
+ *                      maxLength: 50
+ *                      required: false
+ *                      example: NA
+ *      responses:
+ *          '200':
+ *              description: Resource created successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
+router.delete('/:id', officeCtrl.deleteOffice)//TODO swagger
 
 module.exports = router;

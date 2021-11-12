@@ -36,9 +36,8 @@ router.get('/nb', customersCtrl.nbCustomers);
  *          '400':
  *              description: Bad request
  */
-router.get('/:id', customersCtrl.oneCustomerById);
-
-router.get('/byemployee/:id', customersCtrl.customerByEmployeeId);
+router.get('/:id', customersCtrl.oneCustomerById);//TODO swagger
+router.get('/byemployee/:id', customersCtrl.customerByEmployeeId);//TODO swagger
 router.post('/', customersCtrl.createOneCustomer);
 /**
  * @swagger
@@ -145,9 +144,113 @@ router.post('/', customersCtrl.createOneCustomer);
  *          '400':
  *              description: Bad request
  */
-
 router.put('/', customersCtrl.updateOneCustomer);
-router.delete('/:id', customersCtrl.deleteOneCustomer);
-router.get('/customerswhodidntpaybyyear/:id', customersCtrl.customersWhoDidntPayByYear);
+/**
+ * @swagger
+ * /api/customers:
+ *   put:
+ *      description: Used to update a customer
+ *      tags:
+ *          - customers
+ *      parameters:
+ *          - in: body
+ *            name: customers
+ *            schema:
+ *              type: object
+ *              required:
+ *                 - customerNumber
+ *                 - customerName
+ *                 - contactLastName
+ *                 - contactFirstName
+ *                 - phone
+ *                 - addressLine1
+ *                 - addressLine2
+ *                 - city
+ *                 - state
+ *                 - postalCode
+ *                 - country
+ *                 - salesRepEmployeeNumber
+ *                 - creditLimit
+ *              properties:
+ *                  customerNumber:
+ *                      type: integer
+ *                      example: 100
+ *                      required: true
+ *                  customerName:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      example: Machin TRUC
+ *                      required: true
+ *                  contactLastName:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      example: Doe
+ *                      required: true
+ *                  contactFirstName:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: true
+ *                      example: John
+ *                  phone:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: true
+ *                      example: 0102030405
+ *                  addressLine1:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: true
+ *                      example: 10 John Doe Street
+ *                  addressLine2:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: false
+ *                      example: building A
+ *                  city:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: true
+ *                      example: New York
+ *                  state:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: false
+ *                      example: New York State
+ *                  postalCode:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: false
+ *                      example: New York
+ *                  country:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 50
+ *                      required: true
+ *                      example: New York
+ *                  salesRepEmployeeNumber:
+ *                      type: integer
+ *                      example: 1002
+ *                  creditLimit:
+ *                      type: integer
+ *                      example: 10000
+ *      responses:
+ *          '200':
+ *              description: Resource created successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
+router.delete('/:id', customersCtrl.deleteOneCustomer);//TODO swagger
+router.get('/customerswhodidntpaybyyear/:id', customersCtrl.customersWhoDidntPayByYear);//TODO swagger
 
 module.exports = router;

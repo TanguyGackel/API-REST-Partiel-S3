@@ -21,7 +21,7 @@ exports.deleteOrderDetails = (data, callback) => {
 }
 
 exports.updateQuantity = (data, callback) => {
-    db.query('UPDATE orderdetails set quantityOrdered = ' + mysql.escape(data.quantityOrdered) + ' WHERE orderNumber = ' + mysql.escape(data.orderNumber) + 'AND productCode = ' + mysql.escape(data.productCode) + ';', (error, results) => {
+    db.query('UPDATE orderdetails set quantityOrdered = ' + mysql.escape(data.quantityOrdered) + ' WHERE orderNumber = ' + mysql.escape(data.orderNumber) + ' AND productCode = ' + mysql.escape(data.productCode) + ';', (error, results) => {
         if(error){
             return callback(error);
         }

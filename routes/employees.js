@@ -20,7 +20,6 @@ router.get('/', employeesCtrl.allEmployees);
  *          '400':
  *              description: Bad request
  */
-
 router.get('/best', employeesCtrl.bestEmployees);
 /**
  * @swagger
@@ -53,8 +52,8 @@ router.get('/best/bypayments', employeesCtrl.bestEmployeesByPayments);
  *          '400':
  *              description: Bad request
  */
-router.get('/:id', employeesCtrl.employeeById);
-router.get('/offices/:office', employeesCtrl.employeeByOffice);
-router.get('/reportsto/:id', employeesCtrl.reportsToById);
+router.get('/:id', employeesCtrl.employeeById);//TODO swagger
+router.get('/offices/:office', employeesCtrl.employeeByOffice);//TODO swagger
+router.get('/reportsto/:id', employeesCtrl.reportsToById);//TODO swagger
 
 module.exports = router;

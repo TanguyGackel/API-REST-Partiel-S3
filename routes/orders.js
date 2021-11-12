@@ -4,8 +4,8 @@ const router = express.Router();
 
 const ordersCtrl = require('../controllers/orders');
 
-router.get('/customers/:id', ordersCtrl.lastOrdersByCustomerId);
-router.post('/', ordersCtrl.createOrderForCustomerWithListOfOrderDetails);
+router.get('/customers/:id', ordersCtrl.lastOrdersByCustomerId);//TODO swagger
+router.post('/', ordersCtrl.createOrderForCustomerWithListOfOrderDetails);//TODO finir swagger et réparer
 /**
  * @swagger
  * /api/orders:
@@ -30,7 +30,7 @@ router.post('/', ordersCtrl.createOrderForCustomerWithListOfOrderDetails);
  *              properties:
  *                  orderNumber:
  *                      type: integer
- *                      example: 10504
+ *                      example: 10604
  *                      required: true
  *                  orderDate:
  *                      type: string
