@@ -204,6 +204,27 @@ router.put('/', officeCtrl.updateOffice);
  *          '400':
  *              description: Bad request
  */
-router.delete('/:id', officeCtrl.deleteOffice)//TODO swagger
+router.delete('/:id', officeCtrl.deleteOffice)
+/**
+ * @swagger
+ * /api/offices/{id}:
+ *  delete:
+ *      description: Used to delete an office by id
+ *      tags:
+ *          - offices
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            type: integer
+ *            description: office id
+ *            required: true
+ *      responses:
+ *          '200':
+ *              description: Resource returned successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
 
 module.exports = router;

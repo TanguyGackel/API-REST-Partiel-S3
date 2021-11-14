@@ -22,7 +22,7 @@ exports.NewProduct = (req, res) => {
         productLine : req.body.productLine,
         productScale : req.body.productScale,
         productVendor : req.body.productVendor,
-        productDescription : req.body.productVendor,
+        productDescription : req.body.productDescription,
         quantityInStock : req.body.quantityInStock,
         buyPrice : req.body.buyPrice,
         MSRP : req.body.MSRP

@@ -292,7 +292,28 @@ router.put('/', customersCtrl.updateOneCustomer);
  *          '400':
  *              description: Bad request
  */
-router.delete('/:id', customersCtrl.deleteOneCustomer);//TODO swagger
+router.delete('/:id', customersCtrl.deleteOneCustomer);
+/**
+ * @swagger
+ * /api/customers/{id}:
+ *  delete:
+ *      description: Used to delete a customer by id
+ *      tags:
+ *          - customers
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            type: integer
+ *            description: customer id
+ *            required: true
+ *      responses:
+ *          '200':
+ *              description: Resource returned successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
 router.get('/customerswhodidntpaybyyear/:id', customersCtrl.customersWhoDidntPayByYear);
 /**
  * @swagger

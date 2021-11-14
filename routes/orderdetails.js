@@ -54,7 +54,28 @@ router.post('/', orderDetailsCtrl.addProductToOrder);
  *          '400':
  *              description: Bad request
  */
-router.delete('/', orderDetailsCtrl.deleteProductToOrder);//TODO swagger
+router.delete('/', orderDetailsCtrl.deleteProductToOrder);
+/**
+ * @swagger
+ * /api/orderdetails/{id}:
+ *  delete:
+ *      description: Used to delete an orderdetails by id
+ *      tags:
+ *          - order details
+ *      parameters:
+ *          - in : path
+ *            name: id
+ *            type: integer
+ *            description: order id
+ *            required: true
+ *      responses:
+ *          '200':
+ *              description: Resource returned successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
 router.put('/', orderDetailsCtrl.updateProductToOrder);
 /**
  * @swagger

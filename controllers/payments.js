@@ -55,7 +55,6 @@ exports.paymentsBetweenTwoMonths = (req, res) => {
         deux : req.params.secmois,
         annee : req.params.date
     }
-    console.log(data);
     paymentsMdl.getPaymentsBetweenTwoMonths(data, (error, results) => {
         if(error){
             return res.status(400).send({

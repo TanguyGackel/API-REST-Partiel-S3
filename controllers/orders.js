@@ -27,7 +27,7 @@ exports.createOrderForCustomerWithListOfOrderDetails = (req, res) => {
     ordersMdl.createOrder(dataOrder, (error, results) => {
         for (i = 0; i < req.body.nbOrderDetails; i++) {
             console.log(i);
-            console.log((req.body.productCode[i]))
+            console.log((req.body.quantityOrdered[i]))
             const dataOrderDetails = {
                 orderNumber : req.body.orderNumber,
                 productCode : req.body.order.productCode[i],
@@ -35,6 +35,7 @@ exports.createOrderForCustomerWithListOfOrderDetails = (req, res) => {
                 priceEach : req.body.order.priceEach[i],
                 orderLineNumber : i+1
             }
+            console.log("premier truc fait")
             orderDetailsMdl.createOrderDetails(dataOrderDetails, (error, results) => {
             });
         }
