@@ -2,10 +2,8 @@ const mysql = require('mysql');
 const db = require('../config/db');
 
 exports.createOrderDetails = (data, callback) => {
-    console.log("on est dedanbs")
     db.query('INSERT INTO orderdetails (orderNumber, productCode, quantityOrdered, priceEach, orderLineNumber) VALUES (?, ?, ?, ?, ?)',
         [data.orderNumber, data.productCode, data.quantityOrdered, data.priceEach, data.orderLineNumber], (error, results) => {
-        console.log("on sort")
         if(error){
             return callback(error);
         }

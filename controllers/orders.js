@@ -26,16 +26,13 @@ exports.createOrderForCustomerWithListOfOrderDetails = (req, res) => {
     };
     ordersMdl.createOrder(dataOrder, (error, results) => {
         for (i = 0; i < req.body.nbOrderDetails; i++) {
-            console.log(i);
-            console.log((req.body.quantityOrdered[i]))
             const dataOrderDetails = {
                 orderNumber : req.body.orderNumber,
-                productCode : req.body.order.productCode[i],
-                quantityOrdered : req.body.order.quantityOrdered[i],
-                priceEach : req.body.order.priceEach[i],
+                productCode : req.body.productCode[i],
+                quantityOrdered : req.body.quantityOrdered[i],
+                priceEach : req.body.priceEach[i],
                 orderLineNumber : i+1
             }
-            console.log("premier truc fait")
             orderDetailsMdl.createOrderDetails(dataOrderDetails, (error, results) => {
             });
         }
