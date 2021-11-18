@@ -19,6 +19,7 @@ const User = sequelize.define('comment', {
     emailID: {
         type: Sequelize.STRING,
         allowNull: false,
+        validate: {isEmail: true},
     },
     password: {
         type: Sequelize.STRING,
