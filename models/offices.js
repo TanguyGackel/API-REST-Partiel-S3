@@ -1,5 +1,5 @@
 const mysql  = require('mysql');
-const db = require('../config/db');
+const db = require('../config/mysql.config');
 
 exports.getAllOffices = (callback) => {
     db.query('SELECT * FROM offices', (error, results) => {

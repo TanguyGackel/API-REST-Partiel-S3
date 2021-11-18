@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const db = require('../config/db');
+const db = require('../config/mysql.config');
 
 exports.createOrderDetails = (data, callback) => {
     db.query('INSERT INTO orderdetails (orderNumber, productCode, quantityOrdered, priceEach, orderLineNumber) VALUES (?, ?, ?, ?, ?)',

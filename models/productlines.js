@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../config/mysql.config');
 
 exports.getAllProductLines = (callback) => {
     db.query('SELECT * FROM productlines', (error, results) => {

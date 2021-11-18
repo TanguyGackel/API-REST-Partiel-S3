@@ -30,6 +30,9 @@ const orderDetailsRoutes = require('./routes/orderdetails');
 const productLinesRoutes = require('./routes/productlines');
 const paymentsRoutes = require('./routes/payments');
 
+const User = require('./models/users');
+const sequelize = require('./config/sequelize.config');
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -50,5 +53,9 @@ app.use('/api/products', productsRoutes);
 app.use('/api/orderDetails', orderDetailsRoutes);
 app.use('/api/productLines', productLinesRoutes);
 app.use('/api/payments', paymentsRoutes);
+
+sequelize.sync()
+    .then(console.log("Sequelize est synchronisé"))
+    .catch((error) => {console.log("Sequelize n'est pas synchronisé", error)});
 
 module.exports = app;
