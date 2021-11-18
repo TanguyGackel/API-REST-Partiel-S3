@@ -11,26 +11,28 @@ module.exports = (passport, user) => {
             if(user){
                 done(null, user.get());
             }
-            done(user.errors, null);
+            else{
+                done(user.errors, null);
+            }
         });
     });
     passport.use('local-signup', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
-        passReqToCallbacl: true
+        passReqToCallback: true
     },
         (req, email, password, done) => {
             let generateHash = (password) => {
                 return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
             };
-            User.findOne({where: {emailId: email}})
+            User.findOne({where: {emailID: email}})
                 .then((user) => {
                     if(user){
                         return done(null, false, {message: 'Cette email est déjà pris'});
                     }
                     let userPassword = generateHash(password);
                     let data = {
-                        emailId: email,
+                        emailID: email,
                         password: userPassword,
                         firstName: req.body.firstName,
                         lastName: req.body.lastName
@@ -56,7 +58,7 @@ module.exports = (passport, user) => {
             let isValidPassword = (userpass, password) => {
                 return bcrypt.compareSync(password, userpass)
             };
-            User.findOne({where: {emailId: email}}.then(function(user) {
+            User.findOne({where: {emailID: email}}).then((user) => {
                 if(!user){
                     return done(null, false, {message: "L'email n'existe pas"});
                 }
@@ -68,7 +70,7 @@ module.exports = (passport, user) => {
             }).catch((err) =>{
                 console.log('Error', err);
                 return done(null, false, {message: "Une erreur s'est produite lors de votre connexion"});
-            }));
+            });
         })
     );
 };

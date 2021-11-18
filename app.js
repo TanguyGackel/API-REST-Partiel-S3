@@ -6,7 +6,9 @@ const swaggerUi = require('swagger-ui-express');
 const passport = require('passport');
 const session = require('express-session');
 const {engine} = require('express-handlebars');
+const {isLoggedIn} = require("./controllers/auth");
 
+//Configuration de dotenv
 dotenv.config();
 
 //Configuration de swagger
@@ -47,11 +49,11 @@ const orderDetailsRoutes = require('./routes/orderdetails');
 const productLinesRoutes = require('./routes/productlines');
 const paymentsRoutes = require('./routes/payments');
 
+//Import nécessaire pour sequelize
 const User = require('./models/users');
 const sequelize = require('./config/sequelize.config');
 
-const authRoute = require('./routes/auth.js')(app,passport);
-
+//import nécessaire pour Passport
 require('./config/passport.config')(passport, User);
 
 app.use((req, res, next) => {
@@ -67,11 +69,13 @@ app.use(bodyParser.json());
 
 //Configuration Passport
 app.use(session({ secret: process.env.SECRET,resave: true, saveUninitialized:true}));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize(() => {}));
+app.use(passport.session(() => {}));
+
+require('./routes/auth.js')(app,passport);
 
 const swaggerDocs = swaggerJsdoc(swaggerOption);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use("/api-docs", isLoggedIn, swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use('/api/customers', customersRoutes);
 app.use('/api/employees', employeesRoutes);
@@ -84,7 +88,7 @@ app.use('/api/payments', paymentsRoutes);
 
 //Synchronisation sequelize
 sequelize.sync()
-    .then(console.log("Sequelize est synchronisé"))
+    .then(() => console.log("Sequelize est synchronisé"))
     .catch((error) => {console.log("Sequelize n'est pas synchronisé", error)});
 
 module.exports = app;

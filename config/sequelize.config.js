@@ -5,7 +5,8 @@ const sequelize = new Sequelize(process.env.DATABASE, process.env.USER, process.
     host: process.env.HOST,
     define: {
         timestamps: false
-    }
+    },
+    logging: false
 });
 
 sequelize.authenticate()
