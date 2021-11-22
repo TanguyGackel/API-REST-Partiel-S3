@@ -3,19 +3,9 @@ const bcrypt = require('bcrypt');
 module.exports = (passport, user) => {
     const User = user;
     const LocalStrategy = require('passport-local').Strategy;
-    passport.serializeUser((user, done) => {
-        done(null, user.id);
-    })
-    passport.deserializeUser((id, done) => {
-        User.findByPk(id).then((user) => {
-            if(user){
-                done(null, user.get());
-            }
-            else{
-                done(user.errors, null);
-            }
-        });
-    });
+    const GoogleStrategy = require('passport-google-oauth2').Strategy;
+    const FacebookStrategy = require('passport-facebook').Strategy;
+    const SteamStrategy = require('passport-steam').Strategy;
     passport.use('local-signup', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
@@ -73,4 +63,45 @@ module.exports = (passport, user) => {
             });
         })
     );
+    const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+    const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+    passport.use(new GoogleStrategy({
+            clientID:     GOOGLE_CLIENT_ID,
+            clientSecret: GOOGLE_CLIENT_SECRET,
+            callbackURL: "http://localhost:3000/google/callback",
+            passReqToCallback   : true
+        },
+        function(request, accessToken, refreshToken, profile, done) {
+            return done(null, profile);
+        }
+    ));
+
+    const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
+    const FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET;
+    passport.use(new FacebookStrategy({
+            clientID: FACEBOOK_APP_ID,
+            clientSecret: FACEBOOK_APP_SECRET,
+            callbackURL: "http://localhost:3000/facebook/callback",
+        },
+        function(accessToken, refreshToken, profile, done){
+            return done(null, profile);
+        }
+    ));
+    passport.use(new SteamStrategy({
+            returnURL: 'http://localhost:3000/steam/callback',
+            realm: 'http://localhost:3000/',
+            apiKey: process.env.STEAM_API_KEY
+        },
+        function(identifier, profile, done) {
+            return done(null, profile);
+        }
+    ));
+
+    passport.serializeUser(function(user, done) {
+        done(null, user);
+    });
+    passport.deserializeUser(function(user, done) {
+        done(null, user);
+    });
+
 };

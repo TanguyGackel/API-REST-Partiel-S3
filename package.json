@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +19,10 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "passport": "^0.5.0",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth2": "^0.2.0",
     "passport-local": "^1.0.0",
+    "passport-steam": "^1.0.17",
     "sequelize": "^6.9.0",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6"
